@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.serviceName }}
+spec:
+  type: ClusterIP
+  ports:
+  - port: {{ .Values.grpcServicePort }}
+    name: {{ .Values.grpcPortName }}
+    targetPort: {{ .Values.grpcPort }}
+    protocol: TCP
+  - port: {{ .Values.restServicePort }}
+    name: {{ .Values.restPortName }}
+    targetPort: {{ .Values.restPort }}
+    protocol: TCP
+  selector:
+    app: {{ .Values.podName }}
